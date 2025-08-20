@@ -1,46 +1,85 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react';
-import ThemeToggle from './ThemeToggle';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTheme } from '../context/ThemeContext'; // Adjust the import path as necessary
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const { theme,handleNextTheme } = useTheme();
 
   return (
-    <div className="navbar bg-base-100 shadow-sm border-b border-base-300">
-      <div className="flex-1">
-        {/* You can add a search bar or other elements here later */}
-      </div>
 
-      <div className="flex-none gap-2">
+    <div className="border-b border-base-300 bg-base-100 p-3 flex justify-between items-center">
+<ul
+              className="flex flex-end gap-5 justify-end items-center w-full">
+    <li>
+      <Link href="/profile">
+        <button
+          className="relative inline-flex items-center justify-center px-6 py-2 font-bold text-white 
+                     rounded-full shadow-md cursor-pointer overflow-hidden
+                     transition-all duration-200 ease-in-out
+                     hover:bg-blue-100 hover:text-indigo-900 active:scale-95"
+        >
+          <span className="z-10">Profile</span>
+          <span className="absolute inset-0 flex items-center justify-center z-0">
+            <span className="w-32 h-32 rounded-full blur-2xl opacity-50 
+                             bg-gradient-to-r from-pink-600 via-purple-500 to-cyan-400
+                             animate-spin-slow"></span>
+          </span>
+        </button>
+      </Link>
+    </li>
 
-        {/* Profile Dropdown */}
-        {session?.user && (
-          <div className="dropdown dropdown-end">
-  
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-200 rounded-box z-[1] mt-3 w-52 p-2 shadow flex gap-3 right-5">
-              <li>
-                <Link href="/profile" className="justify-between">
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link href="/messages">Messages</Link>
-              </li>
-              <Image
-                  alt="User Profile Picture"
-                  src={session.user.image || '/default-avatar.png'} // Fallback image
-                  width={40}
-                  height={40}
-                  className='rounded-full'
-                />
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
+    <li>
+      <Link href="/messages">
+        <button
+          className="relative inline-flex items-center justify-center px-6 py-2 font-bold text-white 
+                     rounded-full shadow-md cursor-pointer overflow-hidden
+                     transition-all duration-200 ease-in-out
+                     hover:bg-blue-100 hover:text-indigo-900 active:scale-95"
+        >
+          <span className="z-10">Message</span>
+          <span className="absolute inset-0 flex items-center justify-center z-0">
+            <span className="w-32 h-32 rounded-full blur-2xl opacity-50 
+                             bg-gradient-to-r from-green-400 via-blue-500 to-purple-500
+                             animate-spin-slow"></span>
+          </span>
+        </button>
+      </Link>
+    </li>
+
+    <li>
+      <button
+        onClick={handleNextTheme}
+        className="relative inline-flex items-center justify-center px-6 py-2 font-bold text-white 
+                   rounded-full shadow-md cursor-pointer overflow-hidden
+                   transition-all duration-200 ease-in-out
+                   hover:bg-blue-100 hover:text-indigo-900 active:scale-95"
+      >
+        <span className="z-10">{theme.name}</span>
+        <span className="absolute inset-0 flex items-center justify-center z-0">
+          <span className="w-32 h-32 rounded-full blur-2xl opacity-50 
+                           bg-gradient-to-r from-pink-600 via-purple-500 to-cyan-400
+                           animate-spin-slow"></span>
+        </span>
+      </button>
+    </li>
+
+    <li>
+      <Image
+        alt="User Profile Picture"
+        src={session?.user?.image || '/default-avatar.png'}
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
+    </li>
+  </ul>
+</div>
+            
   );
 }
+
+
+ 

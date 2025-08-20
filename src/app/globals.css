@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 text-white;
-}
+
 
 /* Custom styles can go below this line */
 

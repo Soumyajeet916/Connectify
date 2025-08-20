@@ -2,8 +2,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { Home, User, MessageSquare, Settings, LogOut } from 'lucide-react';
-import ThemeToggle from './ThemeToggle'; // 1. Import the ThemeToggle component
+import { Home, User, MessageSquare, Settings, LogOut, Book , Brush} from 'lucide-react';
+
+
 
 export default function Sidebar({ darkMode }) {
   const [selected, setSelected] = useState('Home');
@@ -13,6 +14,7 @@ export default function Sidebar({ darkMode }) {
     { name: 'Home', icon: Home, path: '/dashboard' },
     { name: 'Profile', icon: User, path: '/profile' },
     { name: 'Messages', icon: MessageSquare, path: '/messages' },
+    { name: 'Policy', icon: Book, path: '/policy' },
     { name: 'Settings', icon: Settings, path: '/settings' }
   ];
 
@@ -32,10 +34,10 @@ export default function Sidebar({ darkMode }) {
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (
-            <li key={item.name}>
+            <li className='flex' key={item.name}>
               <a
                 onClick={() => handleNavigation(item)}
-                className={`${selected === item.name ? 'active' : ''} gap-3`}
+                className={`${selected === item.name ? 'active' : ''} flex  mb-5 gap-4 ` }
               >
                 <Icon size={18} />
                 {item.name}
@@ -46,14 +48,12 @@ export default function Sidebar({ darkMode }) {
       </ul>
 
       {/* 2. Add ThemeToggle to the footer */}
-      <div className="p-4 border-t border-base-300 space-y-2">
-        <div className="flex items-center justify-between">
-        </div>
+      <div className="p-4 border-t border-base-300 space-y-4">
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="flex items-center gap-2 text-error hover:text-error-focus"
+          className="flex items-center gap-2 text-red-500 hover:text-red-700 transition-colors"
         >
-          <LogOut size={26} />
+          <LogOut size={20} />
           Sign Out
         </button>
       </div>

@@ -1,4 +1,5 @@
 import Providers from "./components/Providers";
+import { ThemeProvider } from "./context/ThemeContext"; // Import the new provider
 import "./globals.css";
 
 export const metadata = {
@@ -10,7 +11,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        {/* Wrap the app with the ThemeProvider */}
+        <ThemeProvider>
+          {/* This is your NextAuth provider */}
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

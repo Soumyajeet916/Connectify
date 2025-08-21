@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { Home, User, MessageSquare, Settings, LogOut, Book , Brush} from 'lucide-react';
+import { Home, User, MessageSquare, Settings, LogOut, Book , Brush,Github} from 'lucide-react';
 
 
 
@@ -51,11 +51,22 @@ export default function Sidebar({ darkMode }) {
 </ul>
       {/* 2. Add ThemeToggle to the footer */}
       <div className="p-4 border-t border-base-300 space-y-4">
+        
+        <a 
+  href="https://github.com/Soumyajeet916/Connectify" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="inline-flex items-center justify-center 
+             transition-transform duration-300 
+             hover:scale-110 active:scale-90"
+>
+  <Github size={40} className="text-white" />
+</a>
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
           className="flex items-center gap-2 text-red-400 hover:text-red-900 transition-colors text-bold"
         >
-          <LogOut size={20} />
+          <LogOut size={30} />
           Sign Out
         </button>
       </div>

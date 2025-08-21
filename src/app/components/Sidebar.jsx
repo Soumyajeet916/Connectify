@@ -29,29 +29,31 @@ export default function Sidebar({ darkMode }) {
       <div className="p-4 border-b border-base-300">
         <h1 className='text-primary text-2xl font-bold'>Connectify</h1>
       </div>
-
       <ul className="menu p-4 w-full flex-1">
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          return (
-            <li className='flex' key={item.name}>
-              <a
-                onClick={() => handleNavigation(item)}
-                className={`${selected === item.name ? 'active' : ''} flex  mb-5 gap-4 ` }
-              >
-                <Icon size={18} />
-                {item.name}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-
+  {menuItems.map((item) => {
+    const Icon = item.icon;
+    return (
+      <li className='flex' key={item.name}>
+        <a
+          onClick={() => handleNavigation(item)}
+          className={`${selected === item.name ? 'active' : ''} flex mb-5 gap-4
+            bg-white/10 backdrop-blur-lg border border-white/20 w-full h-full p-4 rounded-2xl
+            hover:bg-white/20 transition-all duration-300  ease-in-out
+            hover:bg-white/20 hover:scale-105
+          `}
+        >
+          <Icon size={18} />
+          {item.name}
+        </a>
+      </li>
+    );
+  })}
+</ul>
       {/* 2. Add ThemeToggle to the footer */}
       <div className="p-4 border-t border-base-300 space-y-4">
         <button
           onClick={() => signOut({ callbackUrl: '/' })}
-          className="flex items-center gap-2 text-red-500 hover:text-red-700 transition-colors"
+          className="flex items-center gap-2 text-red-400 hover:text-red-900 transition-colors text-bold"
         >
           <LogOut size={20} />
           Sign Out

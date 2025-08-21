@@ -1,10 +1,13 @@
 'use client'
+import ThemeContext from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext'; 
 export default function Content() {
+    const { theme,handleNextTheme } = useTheme();
   return (
-    <main className="flex-1 p-6 bg-slate-200 text-black">
-      <div className="card shadow-xl bg-base-200 text-base-content">
-        <div className="card-body">
-          <h2 className="card-title">Welcome to Connectify</h2>
+    <main className="w-full h-full p-6 bg-red-100">
+      <div className="">
+        <div className="">
+          <h2 className="">Welcome to Connectify</h2>
           <p>
             This is a simple Next.js demo website with a dark/light mode toggle using Lucide icons and DaisyUI themes.
           </p>

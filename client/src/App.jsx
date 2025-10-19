@@ -1,0 +1,35 @@
+import React from 'react'
+import './index.css'
+import {Route,Routes} from 'react-router-dom'
+import Login from './pages/login.jsx'
+import Feed from './pages/Feed.jsx'
+import Messages from './pages/Messages.jsx'
+import Chatbox from './pages/Chatbox.jsx'
+import Connections from './pages/Connections.jsx'
+import Discover from './pages/Discover.jsx'
+import Profile from './pages/Profile.jsx'
+import CreatePost from './pages/CreatePost.jsx'
+import { useUser } from '@clerk/clerk-react'
+import  Layout  from './pages/Layout.jsx'
+const App = () => {
+  const {user}=useUser();
+  return (
+    <>
+    <Routes>
+      <Route path='/login' element={!user ? <Login /> : <Layout />} />
+      <Route element={user ? <Layout /> : <Login />}>
+        <Route index element={<Feed />} />
+        <Route path='messages' element={<Messages />} />
+        <Route path='messages/:userId' element={<Chatbox />} />
+        <Route path='connections' element={<Connections />} />
+        <Route path='discover' element={<Discover />} />
+        <Route path='profile' element={<Profile />} />
+        <Route path='profile/:userId' element={<Profile />} />
+        <Route path='create-post' element={<CreatePost />} />
+      </Route>
+    </Routes>
+    </>
+  )
+}
+
+export default App;

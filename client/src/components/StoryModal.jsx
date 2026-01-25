@@ -1,5 +1,6 @@
 import { ArrowLeft,TextIcon,Video,Camera, Upload,SendHorizonal} from 'lucide-react';
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast';
 
 const StoryModal = ({setShowModal,fetchStories}) => {
 
@@ -108,10 +109,21 @@ return (
     {/*<Camera size={16} />/<Video size={16} /> Media*/}
     <Upload size={18}/> Media</label>
      </div>
-        <button
-  className="flex relative inline-flex items-center justify-center w-full mt-4 px-4 py-3 overflow-hidden font-semibold text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+       <button
+  className="relative inline-flex items-center justify-center w-full mt-4 px-4 py-3 overflow-hidden font-semibold text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-gray-50 group"
+  onClick={() =>
+    toast.promise(
+      handleCreateStory(),
+      {
+        loading: 'Creating Story...',
+        success: <p>Story added</p>,
+        error: (e) => <p>{e.message}</p>,
+      }
+    )
+  }
 >
   <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
+
   <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
     <svg
       className="w-5 h-5 text-green-900"
@@ -128,6 +140,7 @@ return (
       ></path>
     </svg>
   </span>
+
   <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
     <svg
       className="w-5 h-5 text-green-200"
@@ -144,10 +157,12 @@ return (
       ></path>
     </svg>
   </span>
+
   <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
     Share
   </span>
 </button>
+
 
     </div>
   </div>

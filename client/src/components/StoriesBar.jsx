@@ -1,8 +1,9 @@
-import React, { use, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { dummyStoriesData } from '../assets/assets';
 import { Plus } from 'lucide-react';
 import moment from 'moment';
 import StoryModal from './StoryModal';
+import StoryViewer from './StoryViewer';
 
 const StoriesBar = () => {
   const [stories, setStories] = useState([]);
@@ -18,7 +19,8 @@ const StoriesBar = () => {
   }, []);
 
   return (
-    <div className="w-full no-scrollbar overflow-x-auto px-4">
+   <div className="w-full overflow-x-auto px-4 scrollbar-thin scrollbar-thumb-indigo-500 scrollbar-track-transparent hover:scrollbar-thumb-indigo-600" >
+
       <div className="flex gap-4 pb-5">
         
         {/* Create Story card */}
@@ -34,6 +36,7 @@ const StoriesBar = () => {
         {/* Story cards */}
         {stories.map((story, index) => (
           <div
+          onClick={() => setViewStory(story)}
             key={index}
             className="relative rounded-lg shadow min-w-[120px] max-w-[120px] max-h-[160px] cursor-pointer hover:shadow-lg transition-all duration-200 bg-gradient-to-b from-indigo-500 to-purple-600 hover:from-indigo-700 hover:to-purple-800 active:scale-95"
           >
@@ -74,6 +77,9 @@ const StoriesBar = () => {
       </div>
       {/* add story modal*/}
       {showModal && <StoryModal setShowModal={setShowModal} fetchStories={fetchStories} />}
+
+
+      {viewStory && <StoryViewer viewStory={viewStory} setViewStory={setViewStory} />}
     </div>
   );
 };
